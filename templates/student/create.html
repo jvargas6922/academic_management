@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block title %} 
+    Crear Estudiante
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Crear Estudiante</h2>
+    <a href="{% url 'list_students' %}" class="btn btn-warning mb-3">Volver al Listado</a>
+    <form action="">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+    </form>
+</div>
+
+{% endblock %}
