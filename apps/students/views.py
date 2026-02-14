@@ -25,6 +25,6 @@ def create(requests):
             birth_date=birth_date
             )
         student.save()
-        return redirect('students:index')
+        return redirect('list_students')
     return render(requests, 'student/create.html')
         

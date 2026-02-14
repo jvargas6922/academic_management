@@ -8,12 +8,25 @@
 <div class="container">
     <h2 class="text-center">Crear Estudiante</h2>
     <a href="{% url 'list_students' %}" class="btn btn-warning mb-3">Volver al Listado</a>
-    <form action="">
+    <form method="POST" action="{% url 'create_student' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="first_name" class="form-label">Nombre</label>
-            <input type="text" class="form-control" id="first_name" name="first_name" required>
+            <input type="text" class="form-control" id="first_name" name="first_name" maxlength="50" required placeholder="ingrese su nombre">
         </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" required placeholder="ingrese su apellido">
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Email</label>
+            <input type="email" class="form-control" id="email" name="email" required placeholder="prueba@prueba.com">
+        </div>
+        <div class="mb-3">
+            <label for="birth_date" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="birth_date" name="birth_date" required>
+        </div>
+        <button type="submit" class="btn btn-success">Crear Estudiante</button>
     </form>
 </div>
 
