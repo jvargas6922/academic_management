@@ -37,7 +37,7 @@ deactivate () {
 # unset irrelevant variables
 deactivate nondestructive
 
-VIRTUAL_ENV="/Users/joffredvargas/Desktop/Bootcamp/env"
+VIRTUAL_ENV="/Users/joffredvargas/Documents/Bootcamp/Bootcamp_2025/Bootcamp_python/Practicas_bootcamp/M6/practica_m6/academic_management/env"
 export VIRTUAL_ENV
 
 _OLD_VIRTUAL_PATH="$PATH"

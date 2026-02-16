@@ -1,5 +1,6 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
+from django.contrib import messages
 from .models import Student
 
 # Create your views here.
@@ -14,17 +15,24 @@ def index(requests):
 
 def create(requests):
     if requests.method == "POST":
-        first_name = requests.POST["first_name"] # otra forma de escribirlo
-        last_name = requests.POST["last_name"]
-        email = requests.POST["email"]
-        birth_date = requests.POST["birth_date"]
-        student = Student(
-            first_name=first_name, 
-            last_name=last_name, 
-            email=email, 
-            birth_date=birth_date
-            )
-        student.save()
-        return redirect('list_students')
+        try:
+            first_name = requests.POST["first_name"] # otra forma de escribirlo
+            last_name = requests.POST["last_name"]
+            email = requests.POST["email"]
+            birth_date = requests.POST["birth_date"]
+            student = Student(
+                first_name=first_name, 
+                last_name=last_name, 
+                email=email, 
+                birth_date=birth_date
+                )
+            student.save()
+            messages.success(requests, "Estudiante creado exitosamente")
+            # return redirect('list_students')
+            return render(requests, 'student/create.html')
+        except Exception as e:
+            messages.error(requests, f"Error al crear el estudiante: {str(e)}")
+        
     return render(requests, 'student/create.html')
+
         

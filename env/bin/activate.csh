@@ -8,7 +8,7 @@ alias deactivate 'test $?_OLD_VIRTUAL_PATH != 0 && setenv PATH "$_OLD_VIRTUAL_PA
 # Unset irrelevant variables.
 deactivate nondestructive
 
-setenv VIRTUAL_ENV "/Users/joffredvargas/Desktop/Bootcamp/env"
+setenv VIRTUAL_ENV "/Users/joffredvargas/Documents/Bootcamp/Bootcamp_2025/Bootcamp_python/Practicas_bootcamp/M6/practica_m6/academic_management/env"
 
 set _OLD_VIRTUAL_PATH="$PATH"
 setenv PATH "$VIRTUAL_ENV/bin:$PATH"
