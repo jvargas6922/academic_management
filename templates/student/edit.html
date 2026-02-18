@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}
+Editar Estudiante
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Editar Estudiante</h2>
+    <form method="POST" action="{% url 'update_student' student.id %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="first_name" class="form-label">Nombre</label>
+            <input type="text" class="form-control" id="first_name" name="first_name" value="{{ student.first_name }}"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="last_name" class="form-label">Apellido</label>
+            <input type="text" class="form-control" id="last_name" name="last_name" value="{{ student.last_name }}"
+                required>
+        </div>
+        <div class="mb-3">
+            <label for="email" class="form-label">Correo Electrónico</label>
+            <input type="email" class="form-control" id="email" name="email" value="{{ student.email }}" required>
+        </div>
+        <div class="mb-3">
+            <label for="birth_date" class="form-label">Fecha de Nacimiento</label>
+            <input type="date" class="form-control" id="birth_date" name="birth_date"
+                value="{{ student.birth_date|date:'Y-m-d' }}" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Guardar Cambios</button>
+        <a href="{% url 'list_students' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+
+{% endblock %}
