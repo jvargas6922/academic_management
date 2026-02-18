@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Crear Inscripción
+{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Crear Inscripción</h2>
+<div class="container">
+    <form method="POST" action="{% url 'create_enrollment' %}">
+        {% csrf_token %}
+        <div class="mb-3">
+            <label for="student" class="form-label">Estudiante</label>
+            <select class="form-select" id="student" name="student">
+                {% for student in students %}
+                <option value="{{ student.id }}">{{ student.first_name }} {{ student.last_name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <div class="mb-3">
+            <label for="course" class="form-label">Curso</label>
+            <select class="form-select" id="course" name="course">
+                {% for course in courses %}
+                <option value="{{ course.id }}">{{ course.name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+        <button type="submit" class="btn btn-primary">Crear Inscripción</button>
+    </form>
+</div>  
+
+{% endblock %}

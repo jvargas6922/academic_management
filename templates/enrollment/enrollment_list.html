@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    Listado de Incripciones
+{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Listado de Incripciones</h2>
+<div class="container">
+    <a href="{% url 'create_enrollment' %}" class="btn btn-primary mb-3">Agregar Incripción</a>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Estudiante</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Fecha de Inscripción</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for enrollment in enrollments %}
+            <tr>
+                <td>{{ enrollment.student }}</td>
+                <td>{{ enrollment.course }}</td>
+                <td>{{ enrollment.enrollment_date }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
