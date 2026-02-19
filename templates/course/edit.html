@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Curso
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Editar Curso</h2>
+    <a href="{% url 'course_list' %}" class="btn btn-warning mb-3">Volver a listado</a>
+    <form method="POST" action="#">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Actualizar Curso</button>
+    </form>
+</div>
+{% endblock %}

@@ -8,7 +8,7 @@ Crear Curso
 <div class="container">
     <h2 class="text-center">Crear Curso</h2>
     <a href="{% url 'course_list' %}" class="btn btn-warning mb-3">Volver a listado</a>
-    <form method="POST" action="{% url 'create_course' %}">
+    <!-- <form method="POST" action="{% url 'create_course' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="name" class="form-label">Nombre</label>
@@ -23,6 +23,11 @@ Crear Curso
             <label for="start_date" class="form-label">Fecha de Inicio</label>
             <input type="date" class="form-control" id="start_date" name="start_date">
         </div>
+        <button type="submit" class="btn btn-success">Crear Curso</button>
+    </form> -->
+    <form method="POST" action="{% url 'create_course' %}">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-success">Crear Curso</button>
     </form>
 </div>
