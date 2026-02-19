@@ -71,4 +71,5 @@ def delete(requests, student_id):
     except Exception as e:
         messages.error(requests, f"Error al eliminar el estudiante: {str(e)}")
 
-        
+def home(requests):
+    return render(requests, 'home.html')

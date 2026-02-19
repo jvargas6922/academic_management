@@ -7,7 +7,7 @@
 {% block content %}
 <div class="container">
     <h2 class="text-center">Crear Estudiante</h2>
-    <a href="{% url 'list_students' %}" class="btn btn-warning mb-3">Volver al Listado</a>
+    <a href="{% url 'student_list' %}" class="btn btn-warning mb-3">Volver al Listado</a>
     <form method="POST" action="{% url 'create_student' %}">
         {% csrf_token %}
         <div class="mb-3">
