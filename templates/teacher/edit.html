@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Profesor
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Editar Profesor</h2>
+    <a href="{% url 'teacher_list' %}" class="btn btn-warning mb-3">Volver a listado</a>
+    <form method="POST" action="{% url 'update_teacher' teacher.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Actualizar Profesor</button>
+    </form>
+</div>
+{% endblock %}

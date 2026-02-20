@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block title %}Profesores{% endblock %}
+
+{% block content %}
+<h2 class="text-center">Listado de profesores</h2>
+<div class="container">
+    <a href="{% url 'create_teacher' %}" class="btn btn-primary mb-3">Agregar Profesor</a>
+     <table class="table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Profesor</th>
+                <th scope="col">Curso</th>
+                <th scope="col">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.first_name }} {{ teacher.last_name }}</td>
+                <td>{{ teacher.course }}</td>
+                <td>
+                    <a href="{% url 'edit_teacher' teacher.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'delete_teacher' teacher.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este profesor?');">Eliminar</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
