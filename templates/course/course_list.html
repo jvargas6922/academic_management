@@ -15,6 +15,7 @@ Listado de Cursos
                     <p class="card-text">{{ course.description }}</p>
                     <p class="card-text">{{ course.start_date }}</p>
                     <a href="{% url 'edit_course' course.id %}" class="btn btn-warning">Editar</a>
+                    <a href="{% url 'delete_course' course.id %}" class="btn btn-danger" onclick="return confirm('¿Estás seguro de que deseas eliminar este curso?');">Eliminar</a>
                 </div>
             </div>
         </div>

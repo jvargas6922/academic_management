@@ -7,5 +7,4 @@ urlpatterns = [
     path('edit/<int:student_id>/', views.edit, name='edit_student'),
     path('update/<int:student_id>/', views.update, name='update_student'),
     path('delete/<int:student_id>/', views.delete, name='delete_student'),
-    # path('home/', views.home, name='home'),
 ]

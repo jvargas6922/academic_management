@@ -70,6 +70,3 @@ def delete(requests, student_id):
         return redirect('list_students')
     except Exception as e:
         messages.error(requests, f"Error al eliminar el estudiante: {str(e)}")
-
-def home(requests):
-    return render(requests, 'home.html')

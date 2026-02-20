@@ -1,24 +1,11 @@
 {% extends 'base.html' %}
 {% block title %}
-    Inicio
+Inicio
 {% endblock %}
 
 {% block content %}
-    <div class="container">
-        <h2 class="text-center">Bienvenido al sistema de gestión académica</h2>
-        <p>Utiliza el menú para navegar por las diferentes secciones.</p>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-            <ul class="nav nav-pills justify-content-center w-100">
-                <li class="nav-item">
-                    <a class="nav-link active" href="{% url 'student_list' %}">Estudiantes</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'course_list' %}">Cursos</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="{% url 'enrollment_list' %}">Inscripciones</a>
-                </li>
-            </ul>
-        </nav>
-    </div>
+<div class="container mt-4">
+    <p class="lead text-center">Este sistema te permite poder hacer la gestión de estudiantes, cursos e inscripciones de manera eficiente.</p>
+    <p class="text-center">Las opciones disponibles se encuentran en el menú de navegación superior.</p>
+</div>
 {% endblock %}

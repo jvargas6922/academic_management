@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Editar Inscripción
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h2 class="text-center">Editar Inscripción</h2>
+    <a href="{% url 'enrollment_list' %}" class="btn btn-warning mb-3">Volver a listado</a>
+    <form method="POST" action="{% url 'update_enrollment' enrollment.id %}">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn btn-success">Actualizar Inscripción</button>
+    </form>
+</div>
+{% endblock %}

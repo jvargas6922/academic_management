@@ -7,7 +7,7 @@
 {% block content %}
 <h2 class="text-center">Crear Inscripción</h2>
 <div class="container">
-    <form method="POST" action="{% url 'create_enrollment' %}">
+    <!-- <form method="POST" action="{% url 'create_enrollment' %}">
         {% csrf_token %}
         <div class="mb-3">
             <label for="student" class="form-label">Estudiante</label>
@@ -25,6 +25,11 @@
                 {% endfor %}
             </select>
         </div>
+        <button type="submit" class="btn btn-primary">Crear Inscripción</button>
+    </form> -->
+    <form method="POST" action="">
+        {% csrf_token %}
+        {{ form.as_p }}
         <button type="submit" class="btn btn-primary">Crear Inscripción</button>
     </form>
 </div>  
