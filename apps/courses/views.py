@@ -4,11 +4,11 @@ from django.contrib import messages
 from .forms import CourseForm
 # Create your views here.
 
-def index(requests):
+def index(request):
     courses = Course.objects.all()
-    return render(requests, 'course/course_list.html', {'courses': courses})
+    return render(request, 'course/course_list.html', {'courses': courses})
 
-def create_course(requests):
+def create_course(request):
     """
     SIN IMPLEMENTACION DE FORMULARIO
     """
@@ -31,49 +31,49 @@ def create_course(requests):
     """
     CON IMPLEMENTACION DE FORMULARIO
     """
-    if requests.method == 'POST':
-        form = CourseForm(requests.POST)
+    if request.method == 'POST':
+        form = CourseForm(request.POST)
         if form.is_valid():
             form.save()
-            messages.success(requests, "Curso creado exitosamente")
+            messages.success(request, "Curso creado exitosamente")
             return redirect('course_list')
     else:
         form = CourseForm()
-    return render(requests, 'course/create.html', {'form': form})
+    return render(request, 'course/create.html', {'form': form})
 
-def edit(requests, course_id):
+def edit(request, course_id):
     course = get_object_or_404(Course, id= course_id)
     form = CourseForm(instance=course)
     context = {
         'form': form,
         'course': course
     }
-    return render(requests, 'course/edit.html', context)
+    return render(request, 'course/edit.html', context)
 
-def update(requests, course_id):
+def update(request, course_id):
     course = get_object_or_404(Course, id= course_id)
-    if requests.method == 'POST':
+    if request.method == 'POST':
         try:
-            form = CourseForm(requests.POST, instance=course)
+            form = CourseForm(request.POST, instance=course)
             if form.is_valid():
                 form.save()
-                messages.success(requests, "Curso actualizado exitosamente")
+                messages.success(request, "Curso actualizado exitosamente")
                 return redirect('course_list')
         except Exception as e:
-            messages.error(requests, f"Error al actualizar el curso: {str(e)}")
+            messages.error(request, f"Error al actualizar el curso: {str(e)}")
     else:
         form = CourseForm(instance=course)
         context = {
             'form': form,
             'course': course
         }
-    return render(requests, 'course/edit.html', context)
+    return render(request, 'course/edit.html', context)
 
-def delete(requests, course_id):
+def delete(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     try:
         course.delete()
-        messages.success(requests, "Curso eliminado exitosamente")
+        messages.success(request, "Curso eliminado exitosamente")
     except Exception as e:
-        messages.error(requests, f"Error al eliminar el curso: {str(e)}")
+        messages.error(request, f"Error al eliminar el curso: {str(e)}")
     return redirect('course_list')

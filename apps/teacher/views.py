@@ -1,17 +1,17 @@
-from django.shortcuts import render, redirect,get_object_or_404
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Teacher
 from apps.courses.models import Course
 from .forms import TeacherForm
 # Create your views here.
-def index(requests):
+def index(request):
     teachers = Teacher.objects.all()
-    return render(requests, "teacher/teacher_list.html", {"teachers": teachers})
+    return render(request, "teacher/teacher_list.html", {"teachers": teachers})
 
-def create(requests):
+def create(request):
     courses = Course.objects.all()
-    if requests.method == "POST":
+    if request.method == "POST":
         try:
-            form = TeacherForm(requests.POST)
+            form = TeacherForm(request.POST)
             if form.is_valid():
                 form.save()
                 return redirect("teacher_list")
@@ -23,9 +23,9 @@ def create(requests):
             "form": form,
             "courses": courses
         }
-    return render(requests, "teacher/create.html", context)
+    return render(request, "teacher/create.html", context)
 
-def edit(requests, teacher_id):
+def edit(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     courses = Course.objects.all()
     form = TeacherForm(instance=teacher)
@@ -34,13 +34,13 @@ def edit(requests, teacher_id):
         "teacher": teacher,
         "courses": courses
     }
-    return render(requests, "teacher/edit.html", context)
+    return render(request, "teacher/edit.html", context)
 
-def update(requests, teacher_id):
+def update(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
-    if requests.method == "POST":
+    if request.method == "POST":
         try:
-            form = TeacherForm(requests.POST, instance=teacher)
+            form = TeacherForm(request.POST, instance=teacher)
             if form.is_valid():
                 form.save()
                 return redirect("teacher_list")
@@ -52,9 +52,9 @@ def update(requests, teacher_id):
             "form": form,
             "teacher": teacher
         }
-    return render(requests, "teacher/edit.html", context)
+    return render(request, "teacher/edit.html", context)
 
-def delete(requests, teacher_id):
+def delete(request, teacher_id):
     teacher = get_object_or_404(Teacher, id=teacher_id)
     try:
         teacher.delete()

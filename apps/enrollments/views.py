@@ -5,11 +5,11 @@ from apps.students.models import Student
 from apps.courses.models import Course
 from .forms import EnrollmentForm
 # Create your views here.
-def index(requests):
+def index(request):
     enrollments = Enrollment.objects.all()
-    return render(requests, 'enrollment/enrollment_list.html', {'enrollments': enrollments})
+    return render(request, 'enrollment/enrollment_list.html', {'enrollments': enrollments})
 
-def create_enrollment(requests):
+def create_enrollment(request):
     """
     SIN APLICACION DE FORMULARIOS DE DJANGO
     """    
@@ -43,15 +43,15 @@ def create_enrollment(requests):
     """
     CON LA APLICACION DE FORMULARIOS DE DJANGO
     """
-    if requests.method == 'POST':
+    if request.method == 'POST':
         try:
-            form = EnrollmentForm(requests.POST)
+            form = EnrollmentForm(request.POST)
             if form.is_valid():
                 form.save()
-                messages.success(requests, 'Inscripción creada exitosamente')
+                messages.success(request, 'Inscripción creada exitosamente')
                 return redirect('enrollment_list')
         except Exception as e:
-            messages.error(requests, f'Error al crear la inscripción: {str(e)}')
+            messages.error(request, f'Error al crear la inscripción: {str(e)}')
     else:
         students = Student.objects.all()
         courses = Course.objects.all()
@@ -60,41 +60,41 @@ def create_enrollment(requests):
             'courses': courses,
             'form': EnrollmentForm()
         }
-    return render(requests, 'enrollment/create.html', context)
+    return render(request, 'enrollment/create.html', context)
 
-def edit(requests, enrollment_id):
+def edit(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, id=enrollment_id)
     form = EnrollmentForm(instance=enrollment)
     context = {
         'form': form,
         'enrollment': enrollment
     }
-    return render(requests, 'enrollment/edit.html', context)
+    return render(request, 'enrollment/edit.html', context)
 
-def update(requests, enrollment_id):
+def update(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, id=enrollment_id)
-    if requests.method == "POST":
+    if request.method == "POST":
         try:
-            form = EnrollmentForm(requests.POST, instance=enrollment)
+            form = EnrollmentForm(request.POST, instance=enrollment)
             if form.is_valid():
                 form.save()
-                messages.success(requests, "Inscripción actualizada exitosamente")
+                messages.success(request, "Inscripción actualizada exitosamente")
                 return redirect('enrollment_list')
         except Exception as e:
-            messages.error(requests, f"Error al actualizar la inscripción: {str(e)}") 
+            messages.error(request, f"Error al actualizar la inscripción: {str(e)}") 
     else:
         form = EnrollmentForm(instance=enrollment)
         context = {
             'form': form,
             'enrollment': enrollment
         }
-    return render(requests, 'enrollment/edit.html', context)
+    return render(request, 'enrollment/edit.html', context)
 
-def delete(requests, enrollment_id):
+def delete(request, enrollment_id):
     enrollment = get_object_or_404(Enrollment, id=enrollment_id)
     try:
         enrollment.delete()
-        messages.success(requests, "Inscripción eliminada exitosamente")
+        messages.success(request, "Inscripción eliminada exitosamente")
     except Exception as e:
-        messages.error(requests, f"Error al eliminar la inscripción: {str(e)}")
+        messages.error(request, f"Error al eliminar la inscripción: {str(e)}")
     return redirect('enrollment_list')

@@ -2,25 +2,26 @@ from django.shortcuts import render,redirect, get_object_or_404
 from django.http import HttpResponse
 from django.contrib import messages
 from .models import Student
-
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-def index(requests):
+@login_required
+def index(request):
     students = Student.objects.all()
     # return HttpResponse("Hola desde el modulo estudiantes")
 
-    return render(requests, 'student/student_list.html', {'students': students})
+    return render(request, 'student/student_list.html', {'students': students})
 
     # otra forma de escribir y poder renderizar la plantilla
-    # return render(request=requests, template_name="students/index.html")
+    # return render(request=request, template_name="students/index.html")
 
-def create(requests):
-    if requests.method == "POST":
+def create(request):
+    if request.method == "POST":
         try:
-            first_name = requests.POST["first_name"] # otra forma de escribirlo
-            last_name = requests.POST["last_name"]
-            email = requests.POST["email"]
-            birth_date = requests.POST["birth_date"]
+            first_name = request.POST["first_name"] # otra forma de escribirlo
+            last_name = request.POST["last_name"]
+            email = request.POST["email"]
+            birth_date = request.POST["birth_date"]
             student = Student(
                 first_name=first_name, 
                 last_name=last_name, 
@@ -28,45 +29,46 @@ def create(requests):
                 birth_date=birth_date
                 )
             student.save()
-            messages.success(requests, "Estudiante creado exitosamente")
+            messages.success(request, "Estudiante creado exitosamente")
             # return redirect('list_students')
-            return render(requests, 'student/create.html')
+            return render(request, 'student/create.html')
         except Exception as e:
-            messages.error(requests, f"Error al crear el estudiante: {str(e)}")
+            messages.error(request, f"Error al crear el estudiante: {str(e)}")
         
-    return render(requests, 'student/create.html')
+    return render(request, 'student/create.html')
 
-def edit(requests, student_id):
+def edit(request, student_id):
     # este metodo me retorna el objeto o un error 404 si no lo encuentra
     student = get_object_or_404(Student, id=student_id)
-    return render(requests, 'student/edit.html', {'student': student})
+    return render(request, 'student/edit.html', {'student': student})
 
-def update(requests, student_id):
+def update(request, student_id):
     student = get_object_or_404(Student, id=student_id)
-    if requests.method == "POST":
+    if request.method == "POST":
         try:
             # captura de los datos del formulario
-            first_name = requests.POST["first_name"] # otra forma de escribirlo
-            last_name = requests.POST["last_name"]
-            email = requests.POST["email"]
-            birth_date = requests.POST["birth_date"]
+            first_name = request.POST["first_name"] # otra forma de escribirlo
+            last_name = request.POST["last_name"]
+            email = request.POST["email"]
+            birth_date = request.POST["birth_date"]
             # actualización de los campos del estudiante
             student.first_name = first_name
             student.last_name = last_name
             student.email = email
             student.birth_date = birth_date
             student.save()
-            messages.success(requests, "Estudiante actualizado exitosamente")
+            messages.success(request, "Estudiante actualizado exitosamente")
             return redirect('list_students')
         except Exception as e:
-            messages.error(requests, f"Error al actualizar el estudiante: {str(e)}")
-    return render(requests, 'student/edit.html', {'student': student})
+            messages.error(request, f"Error al actualizar el estudiante: {str(e)}")
+    return render(request, 'student/edit.html', {'student': student})
 
-def delete(requests, student_id):
+def delete(request, student_id):
     student = get_object_or_404(Student, id=student_id)
     try:
         student.delete()
-        messages.success(requests, "Estudiante eliminado exitosamente")
+        messages.success(request, "Estudiante eliminado exitosamente")
         return redirect('list_students')
     except Exception as e:
-        messages.error(requests, f"Error al eliminar el estudiante: {str(e)}")
+        messages.error(request, f"Error al eliminar el estudiante: {str(e)}")
+    return redirect('list_students')
