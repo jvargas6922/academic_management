@@ -53,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'academic_management.middleware.LoginRequieredMiddleware', # middleware personalizado para requerir login en todas las vistas excepto las especificadas como públicas
 ]
 
 ROOT_URLCONF = 'academic_management.urls'

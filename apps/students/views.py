@@ -5,7 +5,7 @@ from .models import Student
 from django.contrib.auth.decorators import login_required
 
 # Create your views here.
-@login_required
+# @login_required
 def index(request):
     students = Student.objects.all()
     # return HttpResponse("Hola desde el modulo estudiantes")
@@ -15,6 +15,7 @@ def index(request):
     # otra forma de escribir y poder renderizar la plantilla
     # return render(request=request, template_name="students/index.html")
 
+# @login_required
 def create(request):
     if request.method == "POST":
         try:

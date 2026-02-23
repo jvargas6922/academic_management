@@ -26,6 +26,7 @@ def register_view(request):
                 form.save()
                 return redirect("login")  # Redirige a la página de inicio de sesión después de registrarse
         except Exception as e:
+            # form.add_error(None, f"Error al registrar el usuario: {str(e)}")  # Agrega un error no relacionado con un campo específico
             messages.error(request, f"Error al registrar el usuario: {str(e)}")
             print(f"Error al registrar el usuario: {str(e)}")  # Imprime el error en la consola para depuración
     else:

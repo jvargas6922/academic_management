@@ -1,4 +1,7 @@
+
 {% extends 'base.html' %}
+
+{% load static %}
 {% block title %}
 Inicio
 {% endblock %}
@@ -8,4 +11,8 @@ Inicio
     <p class="lead text-center">Este sistema te permite poder hacer la gestión de estudiantes, cursos e inscripciones de manera eficiente.</p>
     <p class="text-center">Las opciones disponibles se encuentran en el menú de navegación superior.</p>
 </div>
+<p class="text-center">Usuario: {{ user.username }}</p>
+<p class="text-center">Email: {{ user.email }}</p>
+<img src="{% static 'img/imagen_prueba.jpeg' %}" alt="imagen_prueba" class="img-fluid mx-auto d-block">
+
 {% endblock %}
